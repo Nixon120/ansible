@@ -1,0 +1,24 @@
+---
+- hosts: rservers
+  become: yes
+  vars_files:
+    - vars/conda-main.yml
+    - vars/rserver.yml
+  roles:
+    - role: uchida.miniconda
+      miniconda_prefix: "{{ conda_prefix }}"
+    - role: geerlingguy.firewall
+
+  tasks:
+    - name: Update the environment to find conda
+      include: tasks/conda-env.yml
+    - name: Install conda and R from conda
+      include: tasks/install-conda-packages.yml
+    - name: Install RStudio server
+      include: tasks/install-rstudio-server.yml
+  environment:
+      PATH: "{{ conda_prefix }}/bin:{{ ansible_env.PATH }}"
+    - name: Update Authorised Users
+      include: tasks/authorise-users.yml
+    - name: Create home directory for new users
+      include: tasks/make-homedir.yml

@@ -1,0 +1,23 @@
+# Update SSSD's permit list
+
+- name: Remove all users in the AD domain from accessing the login nodes
+  shell: /usr/sbin/realm deny --all
+
+- name: Starting building a shell script to white list authorised users
+  shell: echo -n "#!/bin/bash\r\nrealm permit " > /tmp/permit-users.sh
+
+- name: Grant all admin users access to the login nodes
+  shell: echo -n ""{{ item }} "" >> /tmp/permit-users.sh
+  with_items: "{{ authorised_users }}"
+
+- name: Close the shell script to white list authorised users
+  shell: echo "" >> /tmp/permit-users.sh
+
+- name: Execute the script to white list authorised users
+  shell: /bin/bash /tmp/permit-users.sh
+
+# Make sure SSSD is restarted correctly after the above changes.
+- name: Make sure SSSD is restarted successfully.
+  service:
+    name: sssd
+    state: started

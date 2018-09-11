@@ -1,0 +1,9 @@
+---
+- hosts: rservers
+  become: yes
+
+  tasks:
+    - name: Update Authorised Users
+      include: tasks/authorise-users.yml
+    - name: Create home directory for new users
+      include: tasks/make-homedir.yml

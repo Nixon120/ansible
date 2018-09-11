@@ -1,0 +1,33 @@
+---
+conda_packages:
+  - r
+  - numpy
+  - scipy
+  - matplotlib
+
+cran_packages:
+  # tidyverse packages:
+  # broom, DBI, dplyr, forcats, ggplot2, haven, httr, hms, jsonlite, lubridate, magrittr,
+  # modelr, purrr, readr, readxl, stringr, tibble, rvest, tidyr, xml2
+  - tidyverse
+  - knitr
+  - tidyquant
+  - sweep
+
+shared_libraries:
+  - libcurl4-gnutls-dev
+  - libxml2-dev
+  - libjpeg62-dev
+  - libpng16-dev
+  - libssl-dev
+  - gfortran
+  - gfortran-5
+  - libgfortran-5-dev
+  - liblapack-dev
+
+#github_packages:
+
+# Users who are authorised to access this RStudio instance
+authorised_users:
+  - frb15
+  - aba80

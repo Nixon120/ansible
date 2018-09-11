@@ -1,0 +1,5 @@
+---
+- name: user conda packages
+  conda: name={{item}} state=present
+  become: true
+  with_items: '{{conda_packages}}'
