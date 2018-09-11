@@ -1,0 +1,3 @@
+[submodule "roles/canterbury-AD"]
+	path = roles/canterbury-AD
+	url = git@its-git.canterbury.ac.nz:rcc/canterbury-AD.git
