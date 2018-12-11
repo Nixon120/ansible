@@ -11,7 +11,7 @@ to the server.
 For a personal use
 ```sh
 $ sudo apt-get install git ansible
-$ git clone https://its-git.canterbury.ac.nz/rcc/rstudio-servers-v2.git
+$ git clone https://eng-git.canterbury.ac.nz/RCC/rstudio-servers-teaching.git
 $ ansible-playbook --ask-su-pass deploy-rstudio-server.yml
 ```
 
