@@ -1,0 +1,15 @@
+---
+conda_channels:
+  - r
+
+conda_packages:
+  - r
+  - r-tidyverse
+  - r-rcpp
+
+#cran_packages:
+# cran packages not provided by conda
+
+# Users who are authorised to access this RStudio instance
+authorised_users:
+  - frb15

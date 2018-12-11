@@ -7,13 +7,18 @@
   roles:
     - role: uchida.miniconda
       miniconda_prefix: "{{ conda_prefix }}"
+      miniconda_update_conda: True
     - role: geerlingguy.firewall
 
   tasks:
     - name: Update the environment to find conda
       include: tasks/conda-env.yml
-    - name: Install conda and R from conda
+    - name: update channels lists including the r channel
+      include: tasks/conda_channel_update.yml
+    - name: Install conda packages including R
       include: tasks/install-conda-packages.yml
+    - name: Install cran packages
+      include: tasks/install-r-packages.yml
     - name: Install RStudio server
       include: tasks/install-rstudio-server.yml
   environment:

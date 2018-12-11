@@ -1,0 +1,4 @@
+---
+- name: add channel to conda
+  command: conda config --add channels {{ item }}
+  with_items: "{{ conda_channels }}"

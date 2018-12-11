@@ -1,4 +1,4 @@
-#!/usr/bin/env r
+#!/usr/bin/env R
 
 library(docopt)
 
@@ -15,8 +15,7 @@ if (!opt$force) {
   targets <- targets[! targets %in% installed.packages()]
 }
 
-#lib <- Sys.getenv("R_LIBS_USER")
-lib <- "/usr/lib/R/site-library"
+lib <- .Library
 
 if (length(targets) > 0) {
   install.packages(targets, lib = lib)

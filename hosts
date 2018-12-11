@@ -1,6 +1,2 @@
 [rservers]
-rstudio01-rcc.canterbury.ac.nz ansible_user=rcc
-rstudio03-rcc.canterbury.ac.nz ansible_user=rcc
-rstudio-gisc411.canterbury.ac.nz ansible_user=rcc
-rstudio-hlth403.canterbury.ac.nz ansible_user=rcc
-rstudio-hlth690.canterbury.ac.nz ansible_user=rcc
+localhost ansible_connection=local ansible_user=rcc

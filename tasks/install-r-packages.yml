@@ -1,27 +1,16 @@
 ---
-- name: Install shared libraries
-  apt: name={{ item }}
-  with_items: "{{ shared_libraries }}"
+- name: get vars
+  include_vars: vars/conda-main.yml
 
-- name: Setup repo
-  copy: content="options(repos = c(CRAN = 'https://cran.rstudio.com'))" dest=~/.Rprofile
+- name: Get library location
+  command: "{{conda_prefix}}"/bin/R -e 'cat(.Library))'
+  register: r_library
 
-- name: Install r
-  apt: name=r-cran-littler
-
-- name: Get R_LIBS_USER
-  command: /usr/bin/r -e 'cat(Sys.getenv("R_LIBS_USER"))'
-  register: r_libs_user
-
-- name: Create directory for user libraries
-  file: path={{ r_libs_user.stdout }} state=directory
+- name: Create directory for central library
+  file: path={{ r_library.stdout }} state=directory
 
 - name: Install docopt
-  command: /usr/bin/r --libpath={{ r_libs_user.stdout }} -e 'if(! "docopt" %in% installed.packages()) install.packages("docopt", lib="/usr/lib/R/site-library")'
+  command: "{{conda_prefix}}"/bin/R --libpath={{ r_library.stdout }} -e 'if(! "docopt" %in% installed.packages()) install.packages("docopt")'
 
 - name: Install R packages from CRAN
   script: scripts/install.r "{{ cran_packages | join(' ') }}"
-
-- name: Install R packages from Github
-  command: "/usr/lib/R/site-library/littler/examples/installGithub.r {{ github_packages | join(' ') }}"
-  when: github_packages is defined
