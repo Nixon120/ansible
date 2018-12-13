@@ -2,6 +2,7 @@
 host_packages:
   - libsm6
   - libxt6
+  - libxrender1
 
 conda_channels:
   - r
