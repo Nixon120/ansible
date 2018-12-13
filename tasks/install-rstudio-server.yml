@@ -29,5 +29,5 @@
     name: rstudio-server.service
     enabled: yes
     sleep: 5
-    state: restarted
+    state: reloaded
 
