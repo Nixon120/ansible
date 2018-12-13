@@ -11,6 +11,8 @@
     - role: geerlingguy.firewall
 
   tasks:
+    - name: install system packages, including pre-requisite
+      include: tasks/install_host_package.yml
     - name: Update the environment to find conda
       include: tasks/conda-env.yml
     - name: update channels lists including the r channel

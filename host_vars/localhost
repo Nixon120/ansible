@@ -1,4 +1,7 @@
 ---
+host_packages:
+  - libsm6
+
 conda_channels:
   - r
 
