@@ -1,5 +1,5 @@
 ---
-- name: Install prerequisites packages for joing AD
+- name: Install prerequisites system packages
   apt:
     name: "{{ item }}"
     state: latest
