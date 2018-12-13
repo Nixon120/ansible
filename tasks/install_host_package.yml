@@ -1,7 +1,7 @@
 ---
 - name: Install prerequisites packages for joing AD
   apt:
-    name: {{ item }}
+    name: "{{ item }}"
     state: latest
     update_cache: yes
   with_items: '{{host_packages}}'
