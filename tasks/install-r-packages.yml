@@ -3,14 +3,14 @@
   include_vars: vars/conda-main.yml
 
 - name: Get library location
-  command: "{{conda_prefix}}"/bin/R -e 'cat(.Library))'
+  command: R -e 'cat(.Library))'
   register: r_library
 
 - name: Create directory for central library
   file: path={{ r_library.stdout }} state=directory
 
 - name: Install docopt
-  command: "{{conda_prefix}}"/bin/R --libpath={{ r_library.stdout }} -e 'if(! "docopt" %in% installed.packages()) install.packages("docopt")'
+  command: R --libpath={{ r_library.stdout }} -e 'if(! "docopt" %in% installed.packages()) install.packages("docopt")'
 
 - name: Install R packages from CRAN
   script: scripts/install.r "{{ cran_packages | join(' ') }}"
