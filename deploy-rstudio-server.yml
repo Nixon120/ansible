@@ -11,6 +11,10 @@
     - role: geerlingguy.firewall
 
   tasks:
+    - name: Update Authorised Users
+      include: tasks/authorise-users.yml
+    - name: Create home directory for new users
+      include: tasks/make-homedir.yml
     - name: install system packages, including pre-requisite
       include: tasks/install_host_package.yml
     - name: Update the environment to find conda
@@ -25,7 +29,3 @@
       include: tasks/install-rstudio-server.yml
   environment:
       PATH: "{{ conda_prefix }}/bin:{{ ansible_env.PATH }}"
-    - name: Update Authorised Users
-      include: tasks/authorise-users.yml
-    - name: Create home directory for new users
-      include: tasks/make-homedir.yml
