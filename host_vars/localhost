@@ -13,7 +13,8 @@ conda_packages:
   - r-rcpp
 
 # cran packages not provided by conda
-cran_packages:
+# uncomment if using
+#cran_packages:
 
 # Users who are authorised to access this RStudio instance
 authorised_users:

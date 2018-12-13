@@ -14,3 +14,4 @@
 
 - name: Install R packages from CRAN
   script: scripts/install.r "{{ cran_packages | join(' ') }}"
+  when: cran_packages is defined
