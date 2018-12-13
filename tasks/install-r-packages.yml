@@ -3,7 +3,7 @@
   include_vars: vars/conda-main.yml
 
 - name: Get library location
-  command: R -e 'cat(.Library))'
+  command: R -e 'cat(.Library)'
   register: r_library
 
 - name: Create directory for central library
