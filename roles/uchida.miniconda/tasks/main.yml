@@ -25,9 +25,8 @@
     state=present
 
 - name: miniconda is being installed
-  command: "{{ miniconda_installer}}" -b -p "{{ miniconda_prefix }}"
+  command: /bin/bash/"{{ miniconda_installer}}" -b -p "{{ miniconda_prefix }}"
   args:
-    chdir: /tmp
     creates: "{{ miniconda_prefix }}"
 
 - name: miniconda is up-to-date
