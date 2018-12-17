@@ -1,23 +1,42 @@
+# Add users through SSSD or localy
 # Update SSSD's permit list
+# We don't want to run this if AD is not used or there is no AD users
 
 - name: Remove all users in the AD domain from accessing the login nodes
   shell: /usr/sbin/realm deny --all
+  when: authorised_users is defined
 
 - name: Starting building a shell script to white list authorised users
   shell: echo -n "#!/bin/bash\r\nrealm permit " > /tmp/permit-users.sh
+  when: authorised_users is defined
 
 - name: Grant all admin users access to the login nodes
   shell: echo -n ""{{ item }} "" >> /tmp/permit-users.sh
   with_items: "{{ authorised_users }}"
+  when: authorised_users is defined
 
 - name: Close the shell script to white list authorised users
   shell: echo "" >> /tmp/permit-users.sh
+  when: authorised_users is defined
 
 - name: Execute the script to white list authorised users
   shell: /bin/bash /tmp/permit-users.sh
+  when: authorised_users is defined
 
 # Make sure SSSD is restarted correctly after the above changes.
 - name: Make sure SSSD is restarted successfully.
   service:
     name: sssd
     state: started
+  when: authorised_users is defined
+
+# Add local users that do not rely on Active Directory
+# Note that password is not changed for previously created users.
+- name: Add local users
+  user:
+    name: "{{ item.usercode }}"
+    shell: /bin/bash
+    password: "{{ item.password | password_hash('sha512') }}"
+    update_password: on_create
+  with_items: "{{ local_users }}"
+  when: local_users is defined

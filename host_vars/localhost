@@ -13,9 +13,16 @@ conda_packages:
   - r-rcpp
 
 # cran packages not provided by conda
-# uncomment if using
+# uncomment and populate if using
 #cran_packages:
 
-# Users who are authorised to access this RStudio instance
-authorised_users:
-  - frb15
+# Users who are authorised to access this RStudio instance via AD
+# uncomment and populate if using
+#authorised_users:
+#  - frb15
+
+# local user not having AD credentials
+# uncomment and populate if using
+#local_users:
+#  - usercode: user1
+#    password: a_password

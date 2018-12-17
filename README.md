@@ -12,14 +12,18 @@ For a personal use
 ```sh
 $ sudo apt-get install git ansible
 $ git clone https://eng-git.canterbury.ac.nz/RCC/rstudio-servers-teaching.git
-$ ansible-playbook --ask-su-pass deploy-rstudio-server.yml
+$ ansible-playbook deploy-rstudio-server.yml
 ```
 
 R is installed from conda and will use MKL.
 Adjustments to
- * packages
- * package dependencies
+ * packages from the system
+ * additional conda channels
+ * packages from conda
+ * packages from cran not available through conda
  * users accessing the system (assuming AD)
+ * local users in case AD is not used
 
 can be made in appropriate files in `hosts_vars` for
-each individual rstudio deployement as is appropriate
+each individual rstudio deployement as is appropriate.
+By default the notebook acts on the localhost.

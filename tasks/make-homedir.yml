@@ -1,4 +1,5 @@
 # Ensure all authorised users have a home directory on the server
 - name: Make sure all authorised users have a home directory
-  shell: mkhomedir_helper "{{ item }}" 0077 
+  shell: mkhomedir_helper "{{ item }}" 0077
   with_items: "{{ authorised_users }}"
+  when: authorised_users is defined
