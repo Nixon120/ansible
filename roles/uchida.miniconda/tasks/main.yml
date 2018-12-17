@@ -8,9 +8,9 @@
     force={{ 'yes' if miniconda_installer_checksum == '' else 'no' }}
     mode=0755
 
-- name: directory {{ miniconda_prefix }} exists
+- name: directory {{ miniconda_prefix | dirname }} exists
   file:
-    path="{{ miniconda_prefix }}"
+    path="{{ miniconda_prefix | dirname }}"
     state=directory
     follow=yes
 
