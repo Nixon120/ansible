@@ -7,6 +7,8 @@ host_packages:
 conda_channels:
   - r
 
+# conda provides some cran packages see list at
+# https://docs.anaconda.com/anaconda/packages/r-language-pkg-docs/
 conda_packages:
   - r
   - r-tidyverse
