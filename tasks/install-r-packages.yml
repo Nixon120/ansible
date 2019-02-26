@@ -3,7 +3,8 @@
   include_vars: vars/conda-main.yml
 
 - name: Get library location
-  command: R -q -e 'cat(.Library)'
+  shell: echo "cat(.Library)" > /tmp/r_library.r
+  command: Rscript /tmp/r_library.r
   register: r_library
 
 - name: Create directory for central library
