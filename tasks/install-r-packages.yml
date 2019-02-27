@@ -2,13 +2,17 @@
 - name: get vars
   include_vars: vars/conda-main.yml
 
-- name: Get library location
+- name: Get library location (creating Rscript)
   shell: echo "cat(.Library)" > /tmp/r_library.r
+
+- name: Get library location (from R)
   command: Rscript /tmp/r_library.r
   register: r_library
 
 - name: Create directory for central library
-  file: path={{ r_library.stdout }} state=directory
+  file:
+    path: "{{ r_library.stdout }}"
+    state: directory
 
 - name: Install docopt
   command: R --libpath={{ r_library.stdout }} -e 'if(! "docopt" %in% installed.packages()) install.packages("docopt")'
