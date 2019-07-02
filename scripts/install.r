@@ -18,5 +18,5 @@ if (!opt$force) {
 lib <- .Library
 
 if (length(targets) > 0) {
-  install.packages(targets, lib = lib)
+  install.packages(targets, lib = lib, repos = "https://cloud.r-project.org/")
 }

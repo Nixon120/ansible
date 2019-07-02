@@ -15,7 +15,7 @@
     state: directory
 
 - name: Install docopt
-  command: R --libpath={{ r_library.stdout }} -e 'if(! "docopt" %in% installed.packages()) install.packages("docopt")'
+  command: R --libpath={{ r_library.stdout }} -e 'if(! "docopt" %in% installed.packages()) install.packages("docopt", repos = "https://cloud.r-project.org/")'
 
 - name: Install R packages from CRAN
   script: scripts/install.r "{{ cran_packages | join(' ') }}"
