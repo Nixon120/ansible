@@ -4,6 +4,10 @@ host_packages:
   - libxt6
   - libxrender1
 
+# Do not use the conda-forge channel. The r and conda-forge channels R and R packages
+# do not mix well. Especially anything that could link to libRlapack.
+# The r channel R has it but not the conda-forge channel.
+# Prefer cran packages to conda-forge packages.
 conda_channels:
   - r
 

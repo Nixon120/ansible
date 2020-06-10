@@ -28,5 +28,5 @@
     state: link
  
 - name: Install R packages from CRAN
-  script: scripts/install.r "{{ cran_packages | join(' ') }}"
+  script: scripts/install.r --force "{{ cran_packages | join(' ') }}"
   when: cran_packages is defined
