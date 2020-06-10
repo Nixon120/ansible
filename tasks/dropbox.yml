@@ -1,0 +1,38 @@
+---
+# This playbook handle the golbal installation of dropbox
+
+- name: Download dropbox
+  get_url:
+    url="https://www.dropbox.com/download?plat=lnx.x86_64"
+    dest="/tmp/dropbox.tar.gz"
+    
+- name: Create dropbox directory
+  file:
+    path: /opt/dropbox
+    state: directory
+    mode: '0755'
+
+- name: Unpack the tarball
+  unarchive:
+    src: /tmp/dropbox.tar.gz
+    dest: /tmp
+
+- name: get dropbox version
+  command: cat /tmp/.dropbox-dist/VERSION
+  register: dropbox_version
+
+- name: Copy dropbox in the right place
+  copy:
+    remote_src: yes
+    src: /tmp/.dropbox-dist/dropbox-lnx.x86_64-{{ dropbox_version.stdout }}/
+    dest: /opt/dropbox/
+  
+- name: clean files
+  file:
+    path: ['/tmp/.dropbox-dist', '/tmp/dropbox.tar.gz']
+    state: absent
+    
+- name: put drobox in the environment
+  copy:
+    src: files/dropbox.sh
+    dest: /etc/profile.d/dropbox.sh

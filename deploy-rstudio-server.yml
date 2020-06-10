@@ -27,5 +27,11 @@
       include: tasks/install-r-packages.yml
     - name: Install RStudio server
       include: tasks/install-rstudio-server.yml
+    - name: Install dropbox
+      include: tasks/dropbox.yml
+      when: install_dropbox
+    - name: Install pam_mount
+      include: tasks/pam_mount.yml
+      when: install_pam_mount
   environment:
       PATH: "{{ conda_prefix }}/bin:{{ ansible_env.PATH }}"

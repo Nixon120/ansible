@@ -32,3 +32,9 @@ conda_packages:
 #local_users:
 #  - usercode: user1
 #    password: a_password
+
+# Install dropbox globally if set to True.
+install_dropbox: False
+
+# Install pam_mount if required to mount UC drive(s)
+install_pam_mount: False
