@@ -12,9 +12,10 @@
   register: rstudio_version
   become: no
 
+#url: http://download2.rstudio.org/server/{{ ansible_distribution_release }}/amd64/rstudio-server-{{ rstudio_version.content | regex_replace('-1') }}-amd64.deb
 - name: Get the archive of RStudio Server
   get_url:
-    url: http://download2.rstudio.org/server/{{ ansible_distribution_release }}/amd64/rstudio-server-{{ rstudio_version.content | regex_replace('-1') }}-amd64.deb
+    url: http://download2.rstudio.org/server/bionic/amd64/rstudio-server-{{ rstudio_version.content | regex_replace('-1') }}-amd64.deb
     dest: /tmp/rstudio.deb
   become: no
 
