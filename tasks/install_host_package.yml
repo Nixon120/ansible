@@ -1,7 +1,6 @@
 ---
 - name: Install prerequisites system packages
   apt:
-    name: "{{ item }}"
+    name: "{{ host_packages }}"
     state: latest
     update_cache: yes
-  with_items: '{{host_packages}}'
