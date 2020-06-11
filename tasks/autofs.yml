@@ -43,7 +43,7 @@
   lineinfile:
     path: /tmp/auto.users
     insertafter: EOF
-    line: /home/{{ item }}/Pdrive -fstype=cifs,sec=krb5,user=${UID},cruid=${UID},multiuser,cifsacl,nobrl ://file.canterbury.ac.nz/Users{{ item[0] }}$/{{ item }}/Home
+    line: /home/{{ item }}/Pdrive -fstype=cifs,sec=krb5,user=${UID},cruid=${UID},multiuser,cifsacl,nobrl ://file.canterbury.ac.nz/Users{{ item[0] }}\$/{{ item }}/Home
   with_items: "{{ authorised_users }}"
   when: authorised_users is defined
 
