@@ -1,48 +1,13 @@
 ---
-# This playbook handle the golbal installation of dropbox
+# This playbook handles preparing the system for user install of dropbox
 
 - name: dropbox pre-requisites
   apt: 
     name: ['libglapi-mesa', 'libxcb-glx0', 'libxcb-dri2-0', 'libxcb-dri3-0', 'libxcb-present0', 'libxcb-sync1', 'libxshmfence1', 'libxxf86vm1']
     state: present
 
-- name: Download dropbox
-  get_url:
-    url="https://www.dropbox.com/download?plat=lnx.x86_64"
-    dest="/tmp/dropbox.tar.gz"
-    
-- name: Create dropbox directory
-  file:
-    path: /opt/dropbox
-    state: directory
-    mode: '0755'
-
-- name: Unpack the tarball
-  unarchive:
-    src: /tmp/dropbox.tar.gz
-    dest: /tmp
-
-- name: get dropbox version
-  command: cat /tmp/.dropbox-dist/VERSION
-  register: dropbox_version
-
-- name: Copy dropbox in the right place
-  # see https://github.com/ansible/ansible/issues/69783
-  #copy:
-    #remote_src: yes
-    #src: /tmp/.dropbox-dist/dropbox-lnx.x86_64-{{ dropbox_version.stdout }}/
-    #dest: /opt/dropbox/
-  command: cp -r --preserve=mode /tmp/.dropbox-dist/dropbox-lnx.x86_64-"{{ dropbox_version.stdout }}"/. /opt/dropbox
-  
-- name: clean files
-  file:
-    path: "{{ item }}"
-    state: absent
-  with_items:
-    - /tmp/dropbox.tar.gz
-    - /tmp/.dropbox-dist
-    
-- name: put drobox in the environment
+- name: copy the installation script
   copy:
-    src: files/dropbox.sh
-    dest: /etc/profile.d/dropbox.sh
+    src: files/install-dropbox.sh
+    dest: /usr/local/bin/install
+    mode: 0755
