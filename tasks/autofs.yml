@@ -34,7 +34,12 @@
     path: /tmp/auto.users
     state: absent
 
-- name: create auto.users
+- name: create /tmp/auto.users
+  file:
+    path: /tmp/auto.users
+    state: touch
+
+- name: populate auto.users
   lineinfile:
     path: /tmp/auto.users
     insertafter: EOF
