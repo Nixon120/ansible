@@ -47,6 +47,7 @@
     remotesrc: yes
     src: /tmp/auto.users
     dest: /etc/auto.users
+  when: authorised_users is defined
 
 - name: restart autofs
   systemd:
