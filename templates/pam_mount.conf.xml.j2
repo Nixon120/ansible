@@ -5,7 +5,7 @@
 <volume
   fstype="cifs"
   server="file.canterbury.ac.nz"
-  path="Users{{ item[0] }}\$/{{ item }}/Home"
+  path="Users{{ item[0] }}$/{{ item }}/Home"
   mountpoint="~/Pdrive"
   options="user=%(USER),domain=uocnt,sec=krb5,cruid=%(USERUID),multiuser,vers=3.0"
 />
