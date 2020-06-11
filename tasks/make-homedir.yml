@@ -5,6 +5,16 @@
   when: authorised_users is defined
 
 # Pdrive when pam_mount is requested
+- name: Create .config folders
+  file:
+    path: /home/"{{ item }}"/.config
+    owner: "{{ item }}"
+    group: 1000002
+    mode: 0744
+    state: directory
+  with_items: "{{ authorised_users }}"
+  when: authorised_users is defined and install_pam_mount
+
 - name: Creating Pdrives
   template:
     src: pam_mount.conf.xml.j2
