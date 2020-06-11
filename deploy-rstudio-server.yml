@@ -30,8 +30,8 @@
     - name: Install dropbox
       include: tasks/dropbox.yml
       when: install_dropbox
-    - name: Install pam_mount
-      include: tasks/pam_mount.yml
-      when: install_pam_mount
+    - name: Install autofs
+      include: tasks/autofs.yml
+      when: install_autofs
   environment:
       PATH: "{{ conda_prefix }}/bin:{{ ansible_env.PATH }}"

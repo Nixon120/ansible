@@ -1,0 +1,54 @@
+- name: Install autofs and cifs-utils
+  apt:
+    name: ['autofs', 'cifs-utils']
+    state: latest
+    update_cache: yes
+
+- name: Stop autofs if started
+  systemd:
+    state: stopped
+    name: autofs
+
+- name: Create auto.master.d
+  file:
+    path: /etc/auto.master.d 
+    owner: root
+    group: root
+    state: directory
+
+- name: Create autofs configuration
+  copy:
+    content: '/- /etc/auto.users'
+    dest: /etc/auto.master.d/files.autofs
+
+# make sure sssd is used for id mapping
+- name: Create the sssd alternative
+  alternatives:
+    name: idmap-plugin
+    link: /etc/cifs-utils/idmap-plugin
+    path: /usr/lib/x86_64-linux-gnu/cifs-utils/cifs_idmap_sss.so
+    priority: 50
+
+- name: clean any previous run
+  file:
+    path: /tmp/auto.users
+    state: absent
+
+- name: create auto.users
+  lineinfile:
+    path: /tmp/auto.users
+    insertafter: EOF
+    line: /home/{{ item }}/Pdrive -fstype=cifs,sec=krb5,user=${UID},cruid=${UID},multiuser,cifsacl,nobrl ://file.canterbury.ac.nz/Users{{ item[0] }}$/{{ item }}/Home
+  with_items: "{{ authorised_users }}"
+  when: authorised_users is defined
+
+- name: put auto.users in place
+  copy:
+    remotesrc: yes
+    src: /tmp/auto.users
+    dest: /etc/auto.users
+
+- name: restart autofs
+  systemd:
+    state: started
+    name: autofs

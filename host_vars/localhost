@@ -36,5 +36,5 @@ conda_packages:
 # Install dropbox globally if set to True.
 install_dropbox: False
 
-# Install pam_mount if required to mount UC drive(s)
-install_pam_mount: False
+# Install autofs if required to mount UC drive(s)
+install_autofs: False

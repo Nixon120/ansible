@@ -7,3 +7,6 @@
       include: tasks/authorise-users.yml
     - name: Create home directory for new users
       include: tasks/make-homedir.yml
+    - name: setup autofs for P drive if required
+      include: tasks/autofs.yml
+      when: install_autofs
