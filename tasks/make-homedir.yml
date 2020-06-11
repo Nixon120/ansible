@@ -7,7 +7,7 @@
 # Pdrive when pam_mount is requested
 - name: Create .config folders
   file:
-    path: /home/"{{ item }}"/.config
+    path: /home/{{ item }}/.config
     owner: "{{ item }}"
     group: 1000002
     mode: 0744
@@ -18,7 +18,7 @@
 - name: Creating Pdrives
   template:
     src: pam_mount.conf.xml.j2
-    dest: /home/"{{ item }}"/.config/pam_mount.conf.xml
+    dest: /home/{{ item }}/.config/pam_mount.conf.xml
     owner: "{{ item }}"
     group: 1000002
     mode: 0644
