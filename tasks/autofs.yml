@@ -49,7 +49,7 @@
 
 - name: put auto.users in place
   copy:
-    remotesrc: yes
+    remote_src: yes
     src: /tmp/auto.users
     dest: /etc/auto.users
   when: authorised_users is defined
