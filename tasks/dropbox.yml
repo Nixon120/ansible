@@ -22,15 +22,20 @@
   register: dropbox_version
 
 - name: Copy dropbox in the right place
-  copy:
-    remote_src: yes
-    src: /tmp/.dropbox-dist/dropbox-lnx.x86_64-{{ dropbox_version.stdout }}/
-    dest: /opt/dropbox/
+  # see https://github.com/ansible/ansible/issues/69783
+  #copy:
+    #remote_src: yes
+    #src: /tmp/.dropbox-dist/dropbox-lnx.x86_64-{{ dropbox_version.stdout }}/
+    #dest: /opt/dropbox/
+  command: cp -r --preserve=mode /tmp/.dropbox-dist/dropbox-lnx.x86_64-"{{ dropbox_version.stdout }}"/. /opt/dropbox
   
 - name: clean files
   file:
-    path: ['/tmp/.dropbox-dist', '/tmp/dropbox.tar.gz']
+    path: "{{ item }}"
     state: absent
+  with_items:
+    - /tmp/dropbox.tar.gz
+    - /tmp/.dropbox-dist
     
 - name: put drobox in the environment
   copy:
