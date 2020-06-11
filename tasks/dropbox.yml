@@ -1,6 +1,11 @@
 ---
 # This playbook handle the golbal installation of dropbox
 
+- name: dropbox pre-requisites
+  apt: 
+    name: ['libglapi-mesa', 'libxcb-glx0', 'libxcb-dri2-0', 'libxcb-dri3-0', 'libxcb-present0', 'libxcb-sync1', 'libxshmfence1', 'libxxf86vm1']
+    state: present
+
 - name: Download dropbox
   get_url:
     url="https://www.dropbox.com/download?plat=lnx.x86_64"
