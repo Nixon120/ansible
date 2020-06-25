@@ -9,5 +9,5 @@
 - name: copy the installation script
   copy:
     src: files/install-dropbox.sh
-    dest: /usr/local/bin/install
+    dest: /usr/local/bin/install-dropbox.sh
     mode: 0755
