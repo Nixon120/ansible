@@ -1,2 +1,2 @@
 [rservers]
-localhost ansible_connection=local ansible_user=rcc
+localhost ansible_connection=local
