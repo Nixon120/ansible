@@ -3,7 +3,6 @@
   become: yes
   vars_files:
     - vars/conda-main.yml
-    - vars/rserver.yml
   roles:
     - role: uchida.miniconda
       miniconda_prefix: "{{ conda_prefix }}"

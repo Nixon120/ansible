@@ -4,3 +4,10 @@
 ##############################
 ansible_user: rcc
 ansible_python_interpreter: /usr/bin/python3
+
+firewall_allowed_tcp_ports:
+  - "22"
+
+# Allow only the host rstudio-gw-rcc.canterbury to access port 8787 (RStudio Server).
+firewall_additional_rules:
+  - "iptables -A INPUT -p tcp --dport 8787 -s ucrstudioproxy1p.linux.canterbury.ac.nz -j ACCEPT"
