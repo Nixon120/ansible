@@ -1,12 +1,7 @@
 ---
 - hosts: rservers
   become: yes
-  vars_files:
-    - vars/conda-main.yml
   roles:
-    - role: uchida.miniconda
-      miniconda_prefix: "{{ conda_prefix }}"
-      miniconda_update_conda: True
     - role: geerlingguy.firewall
 
   tasks:
@@ -16,12 +11,6 @@
       include: tasks/make-homedir.yml
     - name: install system packages, including pre-requisite
       include: tasks/install_host_package.yml
-    - name: Update the environment to find conda
-      include: tasks/conda-env.yml
-    - name: update channels lists including the r channel
-      include: tasks/conda_channel_update.yml
-    - name: Install conda packages including R
-      include: tasks/install-conda-packages.yml
     - name: Install cran packages
       include: tasks/install-r-packages.yml
     - name: Install RStudio server
@@ -32,5 +21,3 @@
     - name: Install autofs
       include: tasks/autofs.yml
       when: install_autofs
-  environment:
-      PATH: "{{ conda_prefix }}/bin:{{ ansible_env.PATH }}"
