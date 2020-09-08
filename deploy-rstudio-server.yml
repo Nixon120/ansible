@@ -11,6 +11,8 @@
       include: tasks/make-homedir.yml
     - name: install system packages, including pre-requisite
       include: tasks/install_host_package.yml
+    - name: Install R
+      include: tasks/install-r.yml
     - name: Install cran packages
       include: tasks/install-r-packages.yml
     - name: Install RStudio server
