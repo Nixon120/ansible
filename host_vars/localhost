@@ -4,22 +4,8 @@ host_packages:
   - libxt6
   - libxrender1
 
-# Do not use the conda-forge channel. The r and conda-forge channels R and R packages
-# do not mix well. Especially anything that could link to libRlapack.
-# The r channel R has it but not the conda-forge channel.
-# Prefer cran packages to conda-forge packages.
-conda_channels:
-  - r
 
-# conda provides some cran packages see list at
-# https://docs.anaconda.com/anaconda/packages/r-language-pkg-docs/
-conda_packages:
-  - r
-  - r-tidyverse
-  - r-rcpp
-
-# cran packages not provided by conda
-# uncomment and populate if using
+# cran packages uncomment and populate
 #cran_packages:
 
 # Users who are authorised to access this RStudio instance via AD
