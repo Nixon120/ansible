@@ -12,5 +12,5 @@
 
 - name: Install R
   apt:
-    name: r-base
+    name: r-base-dev
     update_cache: yes

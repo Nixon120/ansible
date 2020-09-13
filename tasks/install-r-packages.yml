@@ -1,13 +1,4 @@
 ---
-- name: Install shared libraries
-  apt:
-    name: "{{ item }}"
-  with_items: "{{ shared_libraries }}"
-
-- name: Setup repo
-  copy: content="options(repos = c(CRAN = 'https://cran.rstudio.com'))" dest=~/.Rprofile
-  become: no
-
 - name: Install r (little r)
   apt:
     name: r-cran-littler
@@ -29,7 +20,8 @@
 
 - name: Install R packages from CRAN
   script: scripts/install.r "{{ cran_packages | join(' ') }}"
-
+  when: cran_packages is defined
+  
 - name: Install R packages from Github
   command: "/usr/lib/R/site-library/littler/examples/installGithub.r {{ github_packages | join(' ') }}"
   when: github_packages is defined
