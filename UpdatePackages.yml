@@ -1,9 +1,6 @@
 ---
 - hosts: rservers
   become: yes
-  vars_files:
-    - vars/conda-main.yml
-    - vars/rserver.yml
 
   tasks:
     - name: install system packages, including pre-requisite
@@ -11,15 +8,7 @@
       tags:
         - system_packages
 
-    - name: Install conda packages including R
-      include: tasks/install-conda-packages.yml
-      tags:
-        - conda_packages
-
     - name: Install cran packages
       include: tasks/install-r-packages.yml
       tags:
         - cran_packages
-
-  environment:
-      PATH: "{{ conda_prefix }}/bin:{{ ansible_env.PATH }}"

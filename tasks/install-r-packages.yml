@@ -1,6 +1,7 @@
 ---
-- name: get vars
-  include_vars: vars/conda-main.yml
+- name: Install r (little r)
+  apt:
+    name: r-cran-littler
 
 - name: Get library location (creating Rscript)
   shell: echo "cat(.Library)" > /tmp/r_library.r
@@ -17,16 +18,10 @@
 - name: Install docopt
   command: R --libpath={{ r_library.stdout }} -e 'if(! "docopt" %in% installed.packages()) install.packages("docopt", repos = "https://cloud.r-project.org/")'
 
-# littler detection of R_LD_LIBRARY_PATH fails on conda
-- name: Install littler
-  command: R --libpath={{ r_library.stdout }} -e 'install.packages("littler", configure.vars = "LD_LIBRARY_PATH={{ conda_prefix }}/lib/R/lib", repos = "https://cloud.r-project.org/")'
-
-- name: Put littler in the PATH
-  file:
-    src: "{{ conda_prefix }}/lib/R/library/littler/bin/r"
-    dest: "{{ conda_prefix }}/bin/r"
-    state: link
- 
 - name: Install R packages from CRAN
-  script: scripts/install.r --force {{ cran_packages | join(' ') }}
+  script: scripts/install.r "{{ cran_packages | join(' ') }}"
   when: cran_packages is defined
+  
+- name: Install R packages from Github
+  command: "/usr/lib/R/site-library/littler/examples/installGithub.r {{ github_packages | join(' ') }}"
+  when: github_packages is defined

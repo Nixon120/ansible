@@ -1,7 +1,4 @@
 ---
-- name: get vars
-  include_vars: vars/conda-main.yml
-
 - name: Install Gdebi
   apt: name=gdebi
 
@@ -12,7 +9,6 @@
   register: rstudio_version
   become: no
 
-#url: http://download2.rstudio.org/server/{{ ansible_distribution_release }}/amd64/rstudio-server-{{ rstudio_version.content | regex_replace('-1') }}-amd64.deb
 - name: Get the archive of RStudio Server
   get_url:
     url: http://download2.rstudio.org/server/bionic/amd64/rstudio-server-{{ rstudio_version.content | regex_replace('-1') }}-amd64.deb
@@ -21,13 +17,6 @@
 
 - name: Install RStudio Server
   command: /usr/bin/gdebi --non-interactive /tmp/rstudio.deb
-
-- name: Make sure we R from conda
-  lineinfile:
-    dest: /etc/rstudio/rserver.conf
-    state: present
-    line: "rsession-which-r={{conda_prefix}}/bin/R"
-    insertafter: EOF
 
 - name: restart Rstudio
   service:
