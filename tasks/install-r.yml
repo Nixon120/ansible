@@ -1,4 +1,6 @@
 ---
+# Up to date documentation on installing the repo and the R package are found at
+# https://cran.rstudio.com/bin/linux/ubuntu/README.html
 - name: Add the APT key
   apt_key:
     keyserver: keyserver.ubuntu.com
