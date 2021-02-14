@@ -11,7 +11,7 @@
 
 - name: Get the archive of RStudio Server
   get_url:
-    url: http://download2.rstudio.org/server/bionic/amd64/rstudio-server-{{ rstudio_version.content | regex_replace('-1') }}-amd64.deb
+    url: http://download2.rstudio.org/server/bionic/amd64/rstudio-server-{{ rstudio_version.content.spli("-")[0] }}-amd64.deb
     dest: /tmp/rstudio.deb
   become: no
 
