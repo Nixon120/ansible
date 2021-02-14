@@ -2,6 +2,9 @@
 - name: Install Gdebi
   apt: name=gdebi
 
+# Latest rstudio can be downloaded from https://rstudio.com/products/rstudio/download-server/debian-ubuntu/
+
+# automatically work out the current version of rstudio server
 - name: Check the newest version of RStudio
   uri:
     url: http://download2.rstudio.org/current.ver
@@ -9,9 +12,11 @@
   register: rstudio_version
   become: no
 
+# Note that current.ver includes a minor revision number of the form "-l#' where "#" is usually an integer.
+# It needs to be cut off as the binary itself doesn't reflect it.
 - name: Get the archive of RStudio Server
   get_url:
-    url: http://download2.rstudio.org/server/bionic/amd64/rstudio-server-{{ rstudio_version.content.spli("-")[0] }}-amd64.deb
+    url: http://download2.rstudio.org/server/bionic/amd64/rstudio-server-{{ rstudio_version.content.split("-")[0] }}-amd64.deb
     dest: /tmp/rstudio.deb
   become: no
 
