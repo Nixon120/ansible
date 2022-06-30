@@ -3,7 +3,12 @@ host_packages:
   - libsm6
   - libxt6
   - libxrender1
-
+  - libcurl4-openssl-dev
+  - libxml2-dev
+  - libssl-dev
+  - cmake
+  - libnlopt-dev
+  - libgdal-dev
 
 # cran packages uncomment and populate
 #cran_packages:
