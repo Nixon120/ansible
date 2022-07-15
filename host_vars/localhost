@@ -13,6 +13,7 @@ host_packages:
   - libjq-dev
   - libudunits2-dev
   - libfontconfig1-dev
+  - protobuf-compiler
 
 # cran packages uncomment and populate
 #cran_packages:
