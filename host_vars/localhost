@@ -9,6 +9,10 @@ host_packages:
   - cmake
   - libnlopt-dev
   - libgdal-dev
+  - libprotobuf-dev
+  - libjq-dev
+  - libudunits2-dev
+  - libfontconfig1-dev
 
 # cran packages uncomment and populate
 #cran_packages:
