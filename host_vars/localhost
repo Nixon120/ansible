@@ -7,6 +7,9 @@ host_packages:
   - libxml2-dev
   - libssl-dev
   - cmake
+  - libeigen3-dev
+  - libcubature-dev
+  - libbliss-dev
   - libnlopt-dev
   - libgdal-dev
   - libprotobuf-dev
